@@ -1,0 +1,92 @@
+// Arvore Merge Sort
+digraph {
+	0 [label="3, 1, 23, 43, 19, 20, 48, 39, 18, 65, 35, 92, 83, 57, 63, 71, 6, 2, 28, 31, 121, 243, 201"]
+	"0L" [label="3, 1, 23, 43, 19, 20, 48, 39, 18, 65, 35"]
+	"0R" [label="92, 83, 57, 63, 71, 6, 2, 28, 31, 121, 243, 201"]
+	0 -> "0L"
+	0 -> "0R"
+	"0LL" [label="3, 1, 23, 43, 19"]
+	"0LR" [label="20, 48, 39, 18, 65, 35"]
+	"0L" -> "0LL"
+	"0L" -> "0LR"
+	"0LLL" [label="3, 1"]
+	"0LLR" [label="23, 43, 19"]
+	"0LL" -> "0LLL"
+	"0LL" -> "0LLR"
+	"0LLLL" [label=3]
+	"0LLLR" [label=1]
+	"0LLL" -> "0LLLL"
+	"0LLL" -> "0LLLR"
+	"0LLRL" [label=23]
+	"0LLRR" [label="43, 19"]
+	"0LLR" -> "0LLRL"
+	"0LLR" -> "0LLRR"
+	"0LLRRL" [label=43]
+	"0LLRRR" [label=19]
+	"0LLRR" -> "0LLRRL"
+	"0LLRR" -> "0LLRRR"
+	"0LRL" [label="20, 48, 39"]
+	"0LRR" [label="18, 65, 35"]
+	"0LR" -> "0LRL"
+	"0LR" -> "0LRR"
+	"0LRLL" [label=20]
+	"0LRLR" [label="48, 39"]
+	"0LRL" -> "0LRLL"
+	"0LRL" -> "0LRLR"
+	"0LRLRL" [label=48]
+	"0LRLRR" [label=39]
+	"0LRLR" -> "0LRLRL"
+	"0LRLR" -> "0LRLRR"
+	"0LRRL" [label=18]
+	"0LRRR" [label="65, 35"]
+	"0LRR" -> "0LRRL"
+	"0LRR" -> "0LRRR"
+	"0LRRRL" [label=65]
+	"0LRRRR" [label=35]
+	"0LRRR" -> "0LRRRL"
+	"0LRRR" -> "0LRRRR"
+	"0RL" [label="92, 83, 57, 63, 71, 6"]
+	"0RR" [label="2, 28, 31, 121, 243, 201"]
+	"0R" -> "0RL"
+	"0R" -> "0RR"
+	"0RLL" [label="92, 83, 57"]
+	"0RLR" [label="63, 71, 6"]
+	"0RL" -> "0RLL"
+	"0RL" -> "0RLR"
+	"0RLLL" [label=92]
+	"0RLLR" [label="83, 57"]
+	"0RLL" -> "0RLLL"
+	"0RLL" -> "0RLLR"
+	"0RLLRL" [label=83]
+	"0RLLRR" [label=57]
+	"0RLLR" -> "0RLLRL"
+	"0RLLR" -> "0RLLRR"
+	"0RLRL" [label=63]
+	"0RLRR" [label="71, 6"]
+	"0RLR" -> "0RLRL"
+	"0RLR" -> "0RLRR"
+	"0RLRRL" [label=71]
+	"0RLRRR" [label=6]
+	"0RLRR" -> "0RLRRL"
+	"0RLRR" -> "0RLRRR"
+	"0RRL" [label="2, 28, 31"]
+	"0RRR" [label="121, 243, 201"]
+	"0RR" -> "0RRL"
+	"0RR" -> "0RRR"
+	"0RRLL" [label=2]
+	"0RRLR" [label="28, 31"]
+	"0RRL" -> "0RRLL"
+	"0RRL" -> "0RRLR"
+	"0RRLRL" [label=28]
+	"0RRLRR" [label=31]
+	"0RRLR" -> "0RRLRL"
+	"0RRLR" -> "0RRLRR"
+	"0RRRL" [label=121]
+	"0RRRR" [label="243, 201"]
+	"0RRR" -> "0RRRL"
+	"0RRR" -> "0RRRR"
+	"0RRRRL" [label=243]
+	"0RRRRR" [label=201]
+	"0RRRR" -> "0RRRRL"
+	"0RRRR" -> "0RRRRR"
+}
