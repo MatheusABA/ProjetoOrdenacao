@@ -456,8 +456,16 @@ class MainWindow:
     
     
     def janela_hash_table(self):
-        # Falta implementação
-        pass
+        Janela_hash = ttkb.Toplevel()
+        Janela_hash.title('Método Merge Sort')
+        # Janela_merge_sort.geometry('600x580')
+        Janela_hash.resizable(False,False)
+        
+        vLarguraTela = Janela_hash.winfo_screenwidth()
+        vAlturaTela = Janela_hash.winfo_screenheight()
+        vX = (vLarguraTela/2) - (600/2)
+        vY = (vAlturaTela/2) - (580/2)
+        Janela_hash.geometry('%dx%d+%d+%d' % (600, 580, vX, vY))
 
     def janela_grafo(self):
         # Falta implementação
