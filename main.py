@@ -13,9 +13,15 @@ class MainWindow:
     def __init__(self):
         self.JanelaPrincipal = ttkb.Window(themename='superhero')
         self.JanelaPrincipal.title('Data Structure Algorithm')
-        self.JanelaPrincipal.geometry('780x350')
         self.JanelaPrincipal.resizable(False, False)
-
+        # teste
+        vLarguraTela = self.JanelaPrincipal.winfo_screenwidth()
+        vAlturaTela = self.JanelaPrincipal.winfo_screenheight()
+        vX = (vLarguraTela/2) - (780/2)
+        vY = (vAlturaTela/2) - (350/2)
+        self.JanelaPrincipal.geometry('%dx%d+%d+%d' % (780, 350, vX, vY))
+        
+        # fim teste
         self.TituloJanelaPrincipal = ttkb.Label(self.JanelaPrincipal, text="Organizador de Dados", font=('Gothic',30), style="info")
         self.TituloJanelaPrincipal.place(x=140, y=10)
 
@@ -93,8 +99,13 @@ class MainWindow:
     def abre_janela_observar_vetor(self):
         JanelaVetor = ttkb.Toplevel()
         JanelaVetor.title('Vetor')
-        JanelaVetor.geometry('550x300')
+        # JanelaVetor.geometry('550x300')
         JanelaVetor.resizable(False, False)
+        vLarguraTela = JanelaVetor.winfo_screenwidth()
+        vAlturaTela = JanelaVetor.winfo_screenheight()
+        vX = (vLarguraTela/2) - (550/2)
+        vY = (vAlturaTela/2) - (350/2)
+        JanelaVetor.geometry('%dx%d+%d+%d' % (550, 350, vX, vY))
 
         def fecha_janela():
             JanelaVetor.destroy()
@@ -175,8 +186,14 @@ class MainWindow:
     def janela_quick_merge(self):
         Janela_ordenacao_quick_merge = ttkb.Toplevel()
         Janela_ordenacao_quick_merge.title('Ordenação Quick-Merge')
-        Janela_ordenacao_quick_merge.geometry('550x200')
+        # Janela_ordenacao_quick_merge.geometry('550x200')
         Janela_ordenacao_quick_merge.resizable(False, False)
+        
+        vLarguraTela = Janela_ordenacao_quick_merge.winfo_screenwidth()
+        vAlturaTela = Janela_ordenacao_quick_merge.winfo_screenheight()
+        vX = (vLarguraTela/2) - (550/2)
+        vY = (vAlturaTela/2) - (200/2)
+        Janela_ordenacao_quick_merge.geometry('%dx%d+%d+%d' % (550, 200, vX, vY))
         
         
         # --------- Funções
@@ -188,8 +205,14 @@ class MainWindow:
         def janela_metodo_quick_sort():
             Janela_quick_sort = ttkb.Toplevel()
             Janela_quick_sort.title('Método Quick Sort')
-            Janela_quick_sort.geometry('600x600')
+            # Janela_quick_sort.geometry('600x600')
             Janela_quick_sort.resizable(False,False)
+            
+            vLarguraTela = Janela_quick_sort.winfo_screenwidth()
+            vAlturaTela = Janela_quick_sort.winfo_screenheight()
+            vX = (vLarguraTela/2) - (600/2)
+            vY = (vAlturaTela/2) - (600/2)
+            Janela_quick_sort.geometry('%dx%d+%d+%d' % (600, 600, vX, vY))
 
             def abre_vetor_inicial():
                 self.abre_janela_observar_vetor()
@@ -264,8 +287,14 @@ class MainWindow:
         def janela_metodo_merge_sort():
             Janela_merge_sort = ttkb.Toplevel()
             Janela_merge_sort.title('Método Merge Sort')
-            Janela_merge_sort.geometry('600x600')
+            # Janela_merge_sort.geometry('600x580')
             Janela_merge_sort.resizable(False,False)
+            
+            vLarguraTela = Janela_merge_sort.winfo_screenwidth()
+            vAlturaTela = Janela_merge_sort.winfo_screenheight()
+            vX = (vLarguraTela/2) - (600/2)
+            vY = (vAlturaTela/2) - (580/2)
+            Janela_merge_sort.geometry('%dx%d+%d+%d' % (600, 580, vX, vY))
         
             def fecha_janela_merge_sort():
                 Janela_merge_sort.destroy()
@@ -276,10 +305,10 @@ class MainWindow:
                     merge_sort(vetor, low, mid)
                     merge_sort(vetor, mid + 1, high)
                     atualizar_vetor_merge_sort(vetor[low:high + 1])
-                    time.sleep(0.5)
+                    time.sleep(1.25)
                     merge(vetor, low, mid, high)
                     atualizar_vetor_merge_sort(vetor[low:high + 1])
-                    time.sleep(0.5)
+                    time.sleep(1.25)
                     
                     
                 
@@ -324,11 +353,12 @@ class MainWindow:
                     lista_vetor.insert(tk.END, f"[{i}] = {valor}")
                 Janela_merge_sort.update()
             
-            def gerar_e_exibir_arvore_merge_sort(vetor, low, high, parent=None):
+            def gerar_e_exibir_arvore_merge_sort(vetor, low, high):
                 
                 # Código para gerar a árvore
                 dot = Digraph(comment='Arvore Merge Sort')
-                dot.node('0', f'{self.vetor_principal}')
+                vetor_str = ', '.join(map(str, self.vetor_principal))
+                dot.node('0', vetor_str)
 
                 def construir_arvore(arr, parent_id):
                     if len(arr) == 1:
@@ -340,9 +370,13 @@ class MainWindow:
 
                     left_id = f'{parent_id}L'
                     right_id = f'{parent_id}R'
-
-                    dot.node(left_id, f'{left}')
-                    dot.node(right_id, f'{right}')
+                    
+                    # Formate a saída para remover os parênteses
+                    left_str = ', '.join(map(str, left))
+                    right_str = ', '.join(map(str, right))
+                    
+                    dot.node(left_id, left_str)
+                    dot.node(right_id, right_str)
                     dot.edge(parent_id, left_id)
                     dot.edge(parent_id, right_id)
 
@@ -350,26 +384,25 @@ class MainWindow:
                     construir_arvore(right, right_id)
 
                 construir_arvore(vetor, '0')
-
+                
+                # Após a árvore ser construída, adicione um nó representando o vetor ordenado
+                
                 dot.format = 'png'
                 dot.render('merge_sort_arvore')
                 
+                messagebox.showinfo('Sucesso','O vetor foi ordenado com sucesso!!')
                 abrir_arvore()
+                
             def gerar_arvore_merge_sort():
                 copia_vetor = self.vetor_principal.copy()
                 merge_sort(copia_vetor, 0, len(copia_vetor) - 1)
-                gerar_e_exibir_arvore_merge_sort(copia_vetor, 0, len(copia_vetor) - 1)
+                copia_vetor_arvore = self.vetor_principal.copy()
+                gerar_e_exibir_arvore_merge_sort(copia_vetor_arvore, 0, len(copia_vetor_arvore) - 1)
                 
             def abrir_arvore():
                 # Abra a imagem da árvore diretamente
                 webbrowser.open('merge_sort_arvore.png')
-
-
-
-            BotaoExibirArvore = ttkb.Button(Janela_merge_sort, text='Exibir Árvore', style='info-outline', width=20,
-                                            command=abrir_arvore)
-            BotaoExibirArvore.place(x=400, y=150)
-                            
+                           
 
             TextoOrdenacaoMergeSort = ttk.Label(Janela_merge_sort, text="Método de Ordenação Merge Sort", style='info',
                                                 font=('Garamond', 16))
@@ -385,16 +418,16 @@ class MainWindow:
             BotaoIniciarOrdenacao.place(x=20, y=150)
 
             lista_vetor = tk.Listbox(Janela_merge_sort, selectmode=tk.SINGLE, font=("Arial", 12), exportselection=False, height=15,
-                                    width=30)
+                                    width=40)
             lista_vetor.place(x=20, y=200)
 
             BotaoVoltar = ttk.Button(Janela_merge_sort, text='Voltar', style='primary-outline', width=10,
                                     command=fecha_janela_merge_sort)
-            BotaoVoltar.place(x=480, y=550)
+            BotaoVoltar.place(x=480, y=532)
 
             # Adicione uma barra de rolagem à janela
             scrollbar = tk.Scrollbar(Janela_merge_sort, orient="vertical")
-            scrollbar.place(x=350, y=200, height=364)
+            scrollbar.place(x=450, y=200, height=363)
             lista_vetor.config(yscrollcommand=scrollbar.set)
             scrollbar.config(command=lista_vetor.yview)
             
@@ -423,8 +456,54 @@ class MainWindow:
     
     
     def janela_hash_table(self):
-        # Falta implementação
-        pass
+        JanelaHash = ttkb.Toplevel()
+        JanelaHash.title('Vetor')
+        # JanelaVetor.geometry('550x300')
+        JanelaHash.resizable(False, False)
+        vLarguraTela = JanelaHash.winfo_screenwidth()
+        vAlturaTela = JanelaHash.winfo_screenheight()
+        vX = (vLarguraTela/2) - (550/2)
+        vY = (vAlturaTela/2) - (350/2)
+        JanelaHash.geometry('%dx%d+%d+%d' % (550, 350, vX, vY))
+        chaves = 20
+        
+        tabela_hash = [[] for _ in range(chaves)]
+        
+        def fecha_hash():
+            JanelaHash.destroy()
+        
+        def preencher_tabela_hash():
+            for i, valor in enumerate(self.vetor_principal):
+                chave = valor % chaves
+                tabela_hash[chave].append(valor)
+                
+        preencher_tabela_hash() # preenche antes de chamar a tabela hash
+
+        frame = ttkb.Frame(JanelaHash)
+        frame.pack(fill=tk.BOTH, expand=False, padx=20, pady=20)
+
+        tabela = ttkb.Treeview(frame, columns= ('Chaves','Valores'), show='headings')
+
+        tabela.heading('#1', text=f'Chave 0 até {chaves}', anchor='w')
+        tabela.heading('#2', text='Valores', anchor='w')
+        tabela.column('#1', width=120, anchor='center')
+        tabela.column('#2', width=800, anchor='w')
+        
+        scrollbar_x = Scrollbar(frame, orient=tk.HORIZONTAL, command=tabela.xview)
+        scrollbar_y = Scrollbar(frame, orient=tk.VERTICAL, command=tabela.yview)
+        tabela.configure(xscrollcommand=scrollbar_x.set)
+        
+
+        scrollbar_x.pack(side=tk.BOTTOM,fill=tk.X)
+        scrollbar_y.pack(side=tk.RIGHT, fill=tk.Y)
+        tabela.pack(side=tk.TOP, fill=tk.BOTH, expand=False)        
+
+        for chave in range(chaves):
+            valores = ', '.join(map(str, tabela_hash[chave]))
+            tabela.insert('', 'end', values=(chave, valores))
+
+        BotaoVoltar = ttkb.Button(JanelaHash, text='Voltar', style='primary-outline', width=10, padding=4 , command=fecha_hash)
+        BotaoVoltar.place(x=440, y=300)               
 
     def janela_grafo(self):
         # Falta implementação
