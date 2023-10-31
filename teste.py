@@ -456,8 +456,54 @@ class MainWindow:
     
     
     def janela_hash_table(self):
-        # Falta implementação
-        pass
+        JanelaHash = ttkb.Toplevel()
+        JanelaHash.title('Vetor')
+        # JanelaVetor.geometry('550x300')
+        JanelaHash.resizable(False, False)
+        vLarguraTela = JanelaHash.winfo_screenwidth()
+        vAlturaTela = JanelaHash.winfo_screenheight()
+        vX = (vLarguraTela/2) - (550/2)
+        vY = (vAlturaTela/2) - (350/2)
+        JanelaHash.geometry('%dx%d+%d+%d' % (550, 350, vX, vY))
+        chaves = 20
+        
+        tabela_hash = [[] for _ in range(chaves)]
+        
+        def fecha_hash():
+            JanelaHash.destroy()
+        
+        def preencher_tabela_hash():
+            for i, valor in enumerate(self.vetor_principal):
+                chave = valor % chaves
+                tabela_hash[chave].append(valor)
+                
+        preencher_tabela_hash() # preenche antes de chamar a tabela hash
+
+        frame = ttkb.Frame(JanelaHash)
+        frame.pack(fill=tk.BOTH, expand=False, padx=20, pady=20)
+
+        tabela = ttkb.Treeview(frame, columns= ('Chaves','Valores'), show='headings')
+
+        tabela.heading('#1', text=f'Chave 0 até {chaves}', anchor='w')
+        tabela.heading('#2', text='Valores', anchor='w')
+        tabela.column('#1', width=120, anchor='center')
+        tabela.column('#2', width=800, anchor='w')
+        
+        scrollbar_x = Scrollbar(frame, orient=tk.HORIZONTAL, command=tabela.xview)
+        scrollbar_y = Scrollbar(frame, orient=tk.VERTICAL, command=tabela.yview)
+        tabela.configure(xscrollcommand=scrollbar_x.set)
+        
+
+        scrollbar_x.pack(side=tk.BOTTOM,fill=tk.X)
+        scrollbar_y.pack(side=tk.RIGHT, fill=tk.Y)
+        tabela.pack(side=tk.TOP, fill=tk.BOTH, expand=False)        
+
+        for chave in range(chaves):
+            valores = ', '.join(map(str, tabela_hash[chave]))
+            tabela.insert('', 'end', values=(chave, valores))
+
+        BotaoVoltar = ttkb.Button(JanelaHash, text='Voltar', style='primary-outline', width=10, padding=4 , command=fecha_hash)
+        BotaoVoltar.place(x=440, y=300)               
 
     def janela_grafo(self):
         # Falta implementação
